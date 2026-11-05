@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax-Deferred Withdrawal Rate by Age</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <nav class="nav"><a href="index.html">Mortality table</a> <a href="withdrawal.html" class="active">Withdrawal rate</a></nav>
+    <h1>How much of my RRSP / RRIF should I withdraw this year?</h1>
+    <p class="lead">A mortality-based withdrawal rate for tax-deferred savings (RRSP, RRIF, other registered accounts). Unlike the fixed &ldquo;4% rule&rdquo;, the percentage rises with age and reaches 100% at age 100, because less and less lifetime remains to spread the money over.</p>
+
+    <form id="controls" onsubmit="return false">
+        <label>Province / territory
+            <select id="geo"></select>
+        </label>
+        <label>Sex
+            <select id="sex">
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+            </select>
+        </label>
+        <label>Current age
+            <input id="age" type="number" min="0" max="100" step="1" value="65">
+        </label>
+        <label>Expected return, after inflation (%/yr)
+            <input id="ret" type="number" min="-5" max="15" step="0.1" value="3">
+        </label>
+        <label>Tax-deferred balance ($, optional)
+            <input id="bal" type="number" min="0" step="1000" placeholder="e.g. 500000">
+        </label>
+        <label>Planning horizon
+            <select id="mode">
+                <option value="expected">Average lifespan (survival-weighted)</option>
+                <option value="p25">Cautious: until 25% of people my age are still alive</option>
+                <option value="p10">Very cautious: until 10% are still alive</option>
+            </select>
+        </label>
+    </form>
+    <p class="privacy">Everything is calculated in your browser. Nothing you enter is stored, saved or sent anywhere.</p>
+    <p id="note" class="note" hidden></p>
+
+    <div id="summary" class="summary"></div>
+
+    <h2>Suggested withdrawal rate by age</h2>
+    <div id="chartW" class="chart"></div>
+    <div class="legend">
+        <span><i style="background:var(--accent)"></i>Mortality-based rate</span>
+        <span><i style="background:#888"></i>Fixed 4% rule</span>
+        <span><i style="background:var(--accent2)"></i>RRIF legal minimum (from age 71)</span>
+    </div>
+
+    <h2>Table</h2>
+    <div class="table-wrap">
+        <table id="wTable">
+            <thead>
+                <tr>
+                    <th>Age</th>
+                    <th>Suggested % of balance</th>
+                    <th>RRIF minimum %</th>
+                    <th>Expected balance at start of year</th>
+                    <th>Suggested withdrawal</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="sources">
+        <h3>How this is calculated</h3>
+        <p>Each year the suggested withdrawal is the balance divided by the survival-weighted present value of one dollar a year for the rest of your life: p = 1 / &Sigma; S<sub>t</sub> &middot; (1+r)<sup>&minus;t</sup>, where S<sub>t</sub> is the chance of being alive t years from now (from the Statistics Canada life tables used on the <a href="index.html">mortality page</a>) and r is your expected after-inflation return. Withdrawing p of the remaining balance each year spends the money evenly (in today&rsquo;s dollars) over your expected lifetime. At 100 the rate is 100% because the model has nothing left to plan for. The cautious options instead assume you live until the age at which only 25% or 10% of people your age are still alive.</p>
+        <p>The &ldquo;expected balance&rdquo; column assumes you follow the suggestion and earn exactly your expected return every year; real returns vary, so recompute each year with your actual balance. Dollar figures are in today&rsquo;s purchasing power.</p>
+        <p>The RRIF minimum is the federal schedule: 1/(90 &minus; age) before 71, a fixed table from 71, and 20% from 95. It only applies once an RRSP is converted to a RRIF (required by the end of the year you turn 71). Larger withdrawals are taxed as income and can push you into a higher bracket, and any remaining RRSP/RRIF is generally taxed as income on death (unless it rolls over to a spouse), which is the reason for drawing down registered money first. This is a planning illustration, not tax or investment advice.</p>
+        <p>Typeface: <a href="https://brailleinstitute.org/freefont">Atkinson Hyperlegible</a>, designed by the Braille Institute of America for maximum legibility, used under the <a href="https://openfontlicense.org">SIL Open Font License 1.1</a>. Charts by <a href="https://d3js.org">D3.js</a>.</p>
+    </div>
+</div>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="withdrawal.js"></script>
+</body>
+</html>
