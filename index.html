@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-CA">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,43 +8,47 @@
 </head>
 <body>
 <div class="container">
-    <nav class="nav"><a href="index.html" class="active">Mortality table</a> <a href="withdrawal.html">Withdrawal rate</a></nav>
-    <h1>Canadian Mortality Table</h1>
-    <p class="lead">Choose where you live, your sex and your age to see the chance of dying and of surviving in each year of life, from age 0 to 100.</p>
+    <nav class="nav">
+        <a href="index.html" class="nav-link active" data-i18n="nav.table">Mortality table</a>
+        <a href="withdrawal.html" class="nav-link" data-i18n="nav.withdrawal">Withdrawal rate</a>
+        <button type="button" id="langToggle" class="lang-toggle">Français</button>
+    </nav>
+    <h1 data-i18n="i.title">Canadian Mortality Table</h1>
+    <p class="lead" data-i18n="i.lead"></p>
 
     <form id="controls" onsubmit="return false">
-        <label>Province / territory
+        <label><span data-i18n="geo"></span>
             <select id="geo"></select>
         </label>
-        <label>Sex
+        <label><span data-i18n="sex"></span>
             <select id="sex">
-                <option value="female">Female</option>
-                <option value="male">Male</option>
+                <option value="female" data-i18n="female">Female</option>
+                <option value="male" data-i18n="male">Male</option>
             </select>
         </label>
-        <label>Current age
+        <label><span data-i18n="age"></span>
             <input id="age" type="number" min="0" max="100" step="1" value="0">
         </label>
     </form>
-    <p class="privacy">Everything is calculated in your browser. Nothing you select is stored, saved or sent anywhere.</p>
+    <p class="privacy" data-i18n="privacy.sel"></p>
     <p id="note" class="note" hidden></p>
 
     <div id="summary" class="summary"></div>
 
-    <h2>Survival from your age</h2>
+    <h2 data-i18n="i.h1"></h2>
     <div id="chartSurvival" class="chart"></div>
-    <h2>Chance of dying each year</h2>
+    <h2 data-i18n="i.h2"></h2>
     <div id="chartQ" class="chart"></div>
 
-    <h2>Table</h2>
+    <h2 data-i18n="i.h3"></h2>
     <div class="table-wrap">
         <table id="mortalityTable">
             <thead>
                 <tr>
-                    <th>Age</th>
-                    <th>Probability of dying this year</th>
-                    <th>Probability of surviving this year</th>
-                    <th>Chance of reaching this age from your age</th>
+                    <th data-i18n="i.th1"></th>
+                    <th data-i18n="i.th2"></th>
+                    <th data-i18n="i.th3"></th>
+                    <th data-i18n="i.th4"></th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -52,16 +56,15 @@
     </div>
 
     <div class="sources">
-        <h3>Sources &amp; methodology</h3>
-        <p>Rates are from Statistics Canada life tables for 2022&ndash;2024 (three-year averages):
-            <a href="https://doi.org/10.25318/1310011401-eng">Table 13-10-0114-01</a> (Canada and nine provinces, single-year ages) and
-            <a href="https://doi.org/10.25318/1310014001-eng">Table 13-10-0140-01</a> (Prince Edward Island, Northwest Territories, Nunavut; 5-year age groups converted to annual rates assuming a constant risk within each group; ages 90&ndash;100 extrapolated).</p>
-        <p>Yukon sex-specific tables are not published, so national rates are shown. Statistics Canada does not publish full life tables below the province/territory level.</p>
-        <p>These are population averages, not a personal prediction. Individual health, income and lifestyle matter a great deal.</p>
-        <p>Typeface: <a href="https://brailleinstitute.org/freefont">Atkinson Hyperlegible</a>, designed by the Braille Institute of America for maximum legibility, used under the <a href="https://openfontlicense.org">SIL Open Font License 1.1</a>. Charts by <a href="https://d3js.org">D3.js</a>.</p>
+        <h3 data-i18n="src.h"></h3>
+        <p data-i18n-html="i.src1"></p>
+        <p data-i18n-html="i.src2"></p>
+        <p data-i18n-html="i.src3"></p>
+        <p data-i18n-html="font"></p>
     </div>
 </div>
 <script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="i18n.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

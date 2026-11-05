@@ -6,6 +6,9 @@ A static web page (GitHub Pages ready). The visitor picks a province/territory, 
 
 ## Files
 - `index.html`, `styles.css`, `script.js` – the page (D3 v7 loaded from CDN).
+- `withdrawal.html`, `withdrawal.js` – mortality-based RRSP/RRIF withdrawal-rate page.
+- `i18n.js` – English-CA / French-CA strings, number formats and the language toggle. The language is carried between pages in the URL hash (`#fr` / `#en`); nothing is stored. To add or change text, edit the `en` and `fr` dictionaries there.
+- `fonts/` – Atkinson Hyperlegible (SIL OFL 1.1, licence included).
 - `data.json` – annual death probabilities (ages 0–100) per geography and sex, from Statistics Canada life tables 2022/2024.
 - `tools/build_data.py` – regenerates `data.json` from the StatCan CSVs (tables 13-10-0114-01 and 13-10-0140-01).
 - `mortality_data.csv` – obsolete (old approximation); no longer used, safe to delete before publishing.
