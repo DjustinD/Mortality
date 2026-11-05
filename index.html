@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canadian Mortality Table</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Canadian Mortality Table</h1>
+    <p class="lead">Choose where you live, your sex and your age to see the chance of dying and of surviving in each year of life, from age 0 to 100.</p>
+
+    <form id="controls" onsubmit="return false">
+        <label>Province / territory
+            <select id="geo"></select>
+        </label>
+        <label>Sex
+            <select id="sex">
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+            </select>
+        </label>
+        <label>Current age
+            <input id="age" type="number" min="0" max="100" step="1" value="0">
+        </label>
+    </form>
+    <p class="privacy">Everything is calculated in your browser. Nothing you select is stored, saved or sent anywhere.</p>
+    <p id="note" class="note" hidden></p>
+
+    <div id="summary" class="summary"></div>
+
+    <h2>Survival from your age</h2>
+    <div id="chartSurvival" class="chart"></div>
+    <h2>Chance of dying each year</h2>
+    <div id="chartQ" class="chart"></div>
+
+    <h2>Table</h2>
+    <div class="table-wrap">
+        <table id="mortalityTable">
+            <thead>
+                <tr>
+                    <th>Age</th>
+                    <th>Probability of dying this year</th>
+                    <th>Probability of surviving this year</th>
+                    <th>Chance of reaching this age from your age</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="sources">
+        <h3>Sources &amp; methodology</h3>
+        <p>Rates are from Statistics Canada life tables for 2022&ndash;2024 (three-year averages):
+            <a href="https://doi.org/10.25318/1310011401-eng">Table 13-10-0114-01</a> (Canada and nine provinces, single-year ages) and
+            <a href="https://doi.org/10.25318/1310014001-eng">Table 13-10-0140-01</a> (Prince Edward Island, Northwest Territories, Nunavut; 5-year age groups converted to annual rates assuming a constant risk within each group; ages 90&ndash;100 extrapolated).</p>
+        <p>Yukon sex-specific tables are not published, so national rates are shown. Statistics Canada does not publish full life tables below the province/territory level.</p>
+        <p>These are population averages, not a personal prediction. Individual health, income and lifestyle matter a great deal.</p>
+    </div>
+</div>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
