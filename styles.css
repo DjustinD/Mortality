@@ -1,3 +1,5 @@
+@font-face { font-family:'Atkinson Hyperlegible'; font-weight:400; font-style:normal; font-display:swap; src:url('fonts/AtkinsonHyperlegible-Regular.ttf') format('truetype'); }
+@font-face { font-family:'Atkinson Hyperlegible'; font-weight:700; font-style:normal; font-display:swap; src:url('fonts/AtkinsonHyperlegible-Bold.ttf') format('truetype'); }
 :root { --ink:#2c3e50; --accent:#2a6f97; --accent2:#c8553d; --bg:#f4f7f6; }
 body { font-family:'Atkinson Hyperlegible',sans-serif; background:var(--bg); color:#333; line-height:1.6; padding:20px; margin:0; }
 .container { max-width:900px; margin:0 auto; background:#fff; padding:30px; border-radius:8px; box-shadow:0 4px 6px rgba(0,0,0,.1); }
@@ -24,7 +26,9 @@ h2 { color:var(--ink); margin-top:36px; font-size:1.2em; }
 .agemark { stroke:var(--ink); stroke-dasharray:3 3; opacity:.5; }
 .dot { fill:#fff; stroke:var(--ink); stroke-width:2; pointer-events:none; }
 .grid line { stroke:#e5e5e5; }
-.axis text { font-family:inherit; font-size:12px; fill:#555; }
+/* d3-axis sets font-family="sans-serif" on the axis <g>; override it via CSS */
+.axis, .axis text { font-family:'Atkinson Hyperlegible',sans-serif; font-size:12px; }
+.axis text { fill:#555; }
 .label { font-size:12px; fill:#555; font-family:inherit; }
 .tip { position:absolute; background:#fff; border:1px solid #ccc; border-radius:6px; padding:6px 10px; font-size:.85em; pointer-events:none; box-shadow:0 2px 6px rgba(0,0,0,.15); }
 
